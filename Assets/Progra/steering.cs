@@ -5,21 +5,21 @@ using UnityEngine;
 public class steering : MonoBehaviour
 {
 
-    public float followSpeed = 15f;
-    public float slowdowDistance = 1f;
+    public float ffollowSpeed = 15f;       // la velocidad
+    
 
-    Vector2 velocity = Vector2.zero;
+    Vector2 V2_velocity = Vector2.zero;   // se define la velocidad en un vector de 2 dimenciones
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 playerDistance = (targetPosition - (Vector2)transform.position);
-        Vector2 disiredVelocity = playerDistance.normalized * followSpeed;
-        Vector2 steering = disiredVelocity - velocity;
+        Vector2 v2_targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);  // se toman cordenadas del mause
+        Vector2 v2_playerDistance = (v2_targetPosition - (Vector2)transform.position);  // identifica la direccion
+        Vector2 v2_disiredVelocity = v2_playerDistance.normalized * ffollowSpeed;  //se agrega la velocidad
+        Vector2 v2_steering = v2_disiredVelocity - V2_velocity;  
 
-        velocity += steering * Time.deltaTime;
+        V2_velocity += v2_steering * Time.deltaTime;  //  actualiza la direccion y la velocidad
 
-        transform.position += (Vector3)velocity * Time.deltaTime;
+        transform.position += (Vector3)V2_velocity * Time.deltaTime;  
     }
 }
